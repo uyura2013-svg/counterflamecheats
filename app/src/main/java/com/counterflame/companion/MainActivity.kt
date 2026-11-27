@@ -117,7 +117,7 @@ private fun AimTrainerScreen(onBack: () -> Unit) {
                         val cx = size.width * targetX
                         val cy = size.height * targetY
                         val radius = size.minDimension * 0.075f
-                        if (hypot(point.x - cx, point.y - cy) <= radius) hits++
+                        if (hypot((point.x - cx).toDouble(), (point.y - cy).toDouble()) <= radius.toDouble()) hits++
                         targetX = Random.nextFloat() * 0.68f + 0.16f
                         targetY = Random.nextFloat() * 0.68f + 0.16f
                     }
