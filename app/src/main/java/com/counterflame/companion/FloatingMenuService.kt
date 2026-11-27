@@ -118,6 +118,18 @@ class FloatingMenuService : Service() {
                 addSlider(root, "Размер прицела", "cross_size", 40, 20)
                 addSlider(root, "Прозрачность", "cross_alpha", 100, 85)
                 root.addView(label("Цвет прицела: зелёный (предпросмотр в приложении)", 11f, muted))
+                root.addView(label("FPS / PERFORMANCE", 12f, orange))
+                val prefs = getSharedPreferences("cf_config", MODE_PRIVATE)
+                val lowLoad = prefs.getBoolean("low_load", false)
+                root.addView(Button(this).apply {
+                    text = if (lowLoad) "ЛЁГКИЙ РЕЖИМ: ВКЛ ✓" else "ВКЛЮЧИТЬ ЛЁГКИЙ РЕЖИМ"
+                    setOnClickListener {
+                        val enabled = !prefs.getBoolean("low_load", false)
+                        prefs.edit().putBoolean("low_load", enabled).apply()
+                        text = if (enabled) "ЛЁГКИЙ РЕЖИМ: ВКЛ ✓" else "ВКЛЮЧИТЬ ЛЁГКИЙ РЕЖИМ"
+                    }
+                })
+                root.addView(label("Снижает визуальную нагрузку самого меню. На FPS игры напрямую не влияет.", 10f, muted))
             }
             "MISC" -> {
                 root.addView(label("MISCELLANEOUS", 12f, orange))
